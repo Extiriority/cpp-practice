@@ -1,4 +1,5 @@
-ToolSet: 11.0 w64 (local)@C:\Users\giang\AppData\Local\JetBrains\Toolbox\apps\CLion-Nova\ch-0\233.11868\bin\mingw
+ToolSet: 11.0 w64 (local)@C:\Users\giang\AppData\Local\JetBrains\Toolbox\apps\CLion-Nova\ch-0\241.10756\bin\mingw
+Ninja: 1.11.1@C:\Users\giang\AppData\Local\JetBrains\Toolbox\apps\CLion-Nova\ch-0\241.10756\bin\ninja\win\x64\ninja.exe
 Options: 
 
-Options:-DCMAKE_MAKE_PROGRAM=C:/Users/giang/AppData/Local/JetBrains/Toolbox/apps/CLion-Nova/ch-0/233.11868/bin/ninja/win/x64/ninja.exe
+Options:-DCMAKE_MAKE_PROGRAM=C:/Users/giang/AppData/Local/JetBrains/Toolbox/apps/CLion-Nova/ch-0/241.10756/bin/ninja/win/x64/ninja.exe
