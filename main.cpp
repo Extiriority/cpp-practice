@@ -27,9 +27,7 @@ public:
         cout << "      _______________" << endl;
     }
 
-    void SwitchPlayer() {
-        playerSymbol = playerSymbol == "X" ? "O" : "X";
-    }
+    void SwitchPlayer() { playerSymbol = playerSymbol == "X" ? "O" : "X"; }
 
     pair<int, int> Input(const string& userCoords, const string& placeXorO) {
         pair<int, int> lastMove;
@@ -101,12 +99,13 @@ int main() {
 
         auto [row, col] = Game.Input(Game.userInput, Game.playerSymbol);
         Game.Update();
-        Game.winState = Game.CheckWin(row, col);
 
         if (Game.turnCounter < 4) {
             Game.nextRound();
             continue;
         }
+
+        Game.winState = Game.CheckWin(row, col);
         if (Game.winState) {
             cout << "Player [" + Game.playerSymbol + "] won this match!" << endl;
         } else if (Game.turnCounter == 8) {
