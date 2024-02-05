@@ -128,25 +128,24 @@ int main() {
         Game.Update();
         Game.winState = Game.CheckWin(row, col);
 
-        if (!Game.winState) {
-            if (Game.CheckDraw()) {
-                cout << "The game is a draw!" << endl;
-                cout << "Try again Y/N?: ";
-                cin >> Game.userInput;
-                if (Game.userInput != "Y") return false;
-                Game.Reset();
-                Game.SwitchPlayer();
-            } else {
-                Game.SwitchPlayer();
-            }
-        } else {
+        if (Game.winState) {
             cout << "Player [" + Game.player + "] won this match!" << endl;
-            cout << "Try again Y/N?: ";
-            cin >> Game.userInput;
-            if (Game.userInput != "Y") return false;
-            Game.Reset();
+        } else if (Game.CheckDraw()) {
+            cout << "The game is a draw!" << endl;
+        } else {
             Game.SwitchPlayer();
+            return false;
         }
+
+        cout << "Try again Y/N?: ";
+        cin >> Game.userInput;
+
+        if (Game.userInput != "Y") {
+            return false;
+        }
+
+        Game.Reset();
+        Game.SwitchPlayer();
     }
 
 /*#pragma region [Dynamic memory allocation using raw and unique pointers]
