@@ -60,15 +60,12 @@ public:
     bool CheckWin(const int row, const int col) const {
         return CheckRow(row) || CheckColumn(col) || CheckDiagonals();
     }
-
     bool CheckRow(const int row) const {
         return coords[row][0] == playerSymbol && coords[row][1] == playerSymbol && coords[row][2] == playerSymbol;
     }
-
     bool CheckColumn(const int col) const {
         return coords[0][col] == playerSymbol && coords[1][col] == playerSymbol && coords[2][col] == playerSymbol;
     }
-
     bool CheckDiagonals() const {
         const bool diagonal1 = coords[0][0] == playerSymbol && coords[1][1] == playerSymbol && coords[2][2] == playerSymbol;
         const bool diagonal2 = coords[0][2] == playerSymbol && coords[1][1] == playerSymbol && coords[2][0] == playerSymbol;
