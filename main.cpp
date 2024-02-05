@@ -3,28 +3,26 @@
 
 using namespace std;
 
-class Noughts_and_Crosses {
+class TicTacToe {
 public:
     string numberTable;
     string border;
+    string player = "X";
+    string userInput;
+    int turns = 0;
+    int counter = 0;
+    bool winState = false;
     string ARow;
     string BRow;
     string CRow;
-    string coords[9] = {" ", " ", " ",
-                        " ", " ", " ",
-                        " ", " ", " "
-       };
-
-    void Update() {
-        cout << numberTable << endl;
-        cout << "A  "+coords[1]+" | "+coords[2]+" | "+coords[3]+" " << endl;
-        cout << border << endl;
-        cout << "B  "+coords[4]+" | "+coords[5]+" | "+coords[6]+" " << endl;
-        cout << border << endl;
-        cout << "C  "+coords[7]+" | "+coords[8]+" | "+coords[9]+" " << endl;
-    }
+    string coords[3][3] =  {
+        {" ", " ", " "},
+        {" ", " ", " "},
+        {" ", " ", " "},
+    };
 
     void InitGame() {
+         cout << "Welcome to Noughts and Crosses" << endl;
          numberTable =  "   1   2   3";
          border = "  -----------";
          ARow = "A   |    |   ";
@@ -34,40 +32,122 @@ public:
         Update();
     }
 
-    void input(const string& userCoords) {
-        if (userCoords == "A1") {coords[1] = "X";}
-        else if (userCoords == "A2") {coords[2] = "X";}
-        else if (userCoords == "A3") {coords[3] = "X";}
-        else if (userCoords == "B1") {coords[4] = "X";}
-        else if (userCoords == "B2") {coords[5] = "X";}
-        else if (userCoords == "B3") {coords[6] = "X";}
-        else if (userCoords == "C1") {coords[7] = "X";}
-        else if (userCoords == "C2") {coords[8] = "X";}
-        else if (userCoords == "C3") {coords[9] = "X";}
-        else {
-            cout << "Invalid input" << endl;
+    void Update() const {
+        cout << "_______________" << endl;
+        cout << numberTable << endl;
+        cout << "A  "+coords[0][0]+" | "+coords[0][1]+" | "+coords[0][2]+" " << endl;
+        cout << border << endl;
+        cout << "B  "+coords[1][0]+" | "+coords[1][1]+" | "+coords[1][2]+" " << endl;
+        cout << border << endl;
+        cout << "C  "+coords[2][0]+" | "+coords[2][1]+" | "+coords[2][2]+" " << endl;
+        cout << "_______________" << endl;
+    }
+
+    void SwitchPlayer() {
+        player = player == "X" ? "O" : "X";
+    }
+
+    pair<int, int> Input(const string& userCoords, const string& currentPlayer) {
+        pair<int, int> lastMove;
+        bool validInput = false;
+
+        if (userCoords == "A1" and coords[0][0] == " ") { coords[0][0] = currentPlayer; lastMove = {0, 0}; validInput = true; }
+        if (userCoords == "A2" and coords[0][1] == " ") { coords[0][1] = currentPlayer; lastMove = {0, 1}; validInput = true; }
+        if (userCoords == "A3" and coords[0][2] == " ") { coords[0][2] = currentPlayer; lastMove = {0, 2}; validInput = true; }
+        if (userCoords == "B1" and coords[1][0] == " ") { coords[1][0] = currentPlayer; lastMove = {1, 0}; validInput = true; }
+        if (userCoords == "B2" and coords[1][1] == " ") { coords[1][1] = currentPlayer; lastMove = {1, 1}; validInput = true; }
+        if (userCoords == "B3" and coords[1][2] == " ") { coords[1][2] = currentPlayer; lastMove = {1, 2}; validInput = true; }
+        if (userCoords == "C1" and coords[2][0] == " ") { coords[2][0] = currentPlayer; lastMove = {2, 0}; validInput = true; }
+        if (userCoords == "C2" and coords[2][1] == " ") { coords[2][1] = currentPlayer; lastMove = {2, 1}; validInput = true; }
+        if (userCoords == "C3" and coords[2][2] == " ") { coords[2][2] = currentPlayer; lastMove = {2, 2}; validInput = true; }
+
+        if (!validInput) {
+            cout << "___Invalid input___" << endl;
+            cout << "Enter empty OR correct coordinates: ";
+            cin >> userInput;
+            cout << "coords is: " << userInput << endl;
+            return Input(userInput, player);
         }
+
+        return lastMove;
+    }
+
+    bool CheckDraw() const {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (coords[row][col] == " ") {
+                    return false;
+                }
+            }
+        }
+    return true;
+}
+
+    bool CheckWin(const int row, const int col) const {
+        return CheckRow(row) || CheckColumn(col) || CheckDiagonals(row, col);
+    }
+
+    bool CheckRow(const int row) const {
+        return coords[row][0] == player && coords[row][1] == player && coords[row][2] == player;
+    }
+
+    bool CheckColumn(const int col) const {
+        return coords[0][col] == player && coords[1][col] == player && coords[2][col] == player;
+    }
+
+    bool CheckDiagonals(const int row, const int col) const {
+        const bool diagonal1 = coords[0][0] == player && coords[1][1] == player && coords[2][2] == player;
+        const bool diagonal2 = coords[0][2] == player && coords[1][1] == player && coords[2][0] == player;
+        return diagonal1 || diagonal2;
+    }
+
+    void Reset() {
+        counter = 0;
+        winState = false;
+
+       for (int row = 0; row < 3; row++) {
+           for (int col = 0; col < 3; col++) {
+               coords[row][col] = " ";
+           }
+       }
+
         Update();
     }
 };
 
 int main() {
-    Noughts_and_Crosses Game;
+    TicTacToe Game;
     Game.InitGame();
 
-    string coords;
+    while (!Game.winState) {
+        cout << "["+ Game.player +"] turn, Enter coordinates: ";
+        cin >> Game.userInput;
+        cout << "coords is: " << Game.userInput << endl;
 
-    cout << "Enter coordinates: ";
-    cin >> coords;
-    cout << "coords is: " << coords << endl;
+        auto [row, col] = Game.Input(Game.userInput, Game.player);
+        Game.Update();
+        Game.winState = Game.CheckWin(row, col);
 
-    Game.input(coords);
-
-    cout << "Enter coordinates: ";
-    cin >> coords;
-    cout << "coords is: " << coords << endl;
-
-    Game.input(coords);
+        if (!Game.winState) {
+            if (Game.CheckDraw()) {
+                cout << "The game is a draw!" << endl;
+                cout << "Try again Y/N?: ";
+                cin >> Game.userInput;
+                if (Game.userInput != "Y") return false;
+                Game.Reset();
+                Game.SwitchPlayer();
+            } else {
+                Game.SwitchPlayer();
+            }
+        } else {
+            cout << "Player [" + Game.player + "] won this match!" << endl;
+            cout << "Try again Y/N?: ";
+            cin >> Game.userInput;
+            if (Game.userInput != "Y") return false;
+            Game.Reset();
+            Game.SwitchPlayer();
+        }
+    }
 
 /*#pragma region [Dynamic memory allocation using raw and unique pointers]
     cout << "___Dynamic memory allocation using raw and unique pointers___" << endl;
