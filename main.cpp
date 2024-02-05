@@ -5,16 +5,12 @@ using namespace std;
 
 class TicTacToe {
 public:
-    string numberTable;
+    string numberRow;
     string border;
     string player = "X";
     string userInput;
     int turns = 0;
-    int counter = 0;
     bool winState = false;
-    string ARow;
-    string BRow;
-    string CRow;
     string coords[3][3] =  {
         {" ", " ", " "},
         {" ", " ", " "},
@@ -23,18 +19,18 @@ public:
 
     void InitGame() {
          cout << "Welcome to Noughts and Crosses" << endl;
-         numberTable =  "   1   2   3";
+         numberRow =  "   1   2   3";
          border = "  -----------";
-         ARow = "A   |    |   ";
-         BRow = "B   |    |   ";
-         CRow = "C   |    |   ";
+         string ARow = "A   |    |   ";
+         string BRow = "B   |    |   ";
+         string CRow = "C   |    |   ";
 
         Update();
     }
 
     void Update() const {
         cout << "_______________" << endl;
-        cout << numberTable << endl;
+        cout << numberRow << endl;
         cout << "A  "+coords[0][0]+" | "+coords[0][1]+" | "+coords[0][2]+" " << endl;
         cout << border << endl;
         cout << "B  "+coords[1][0]+" | "+coords[1][1]+" | "+coords[1][2]+" " << endl;
@@ -68,7 +64,6 @@ public:
             cout << "coords is: " << userInput << endl;
             return Input(userInput, player);
         }
-
         return lastMove;
     }
 
@@ -84,7 +79,7 @@ public:
 }
 
     bool CheckWin(const int row, const int col) const {
-        return CheckRow(row) || CheckColumn(col) || CheckDiagonals(row, col);
+        return CheckRow(row) || CheckColumn(col) || CheckDiagonals();
     }
 
     bool CheckRow(const int row) const {
@@ -95,14 +90,13 @@ public:
         return coords[0][col] == player && coords[1][col] == player && coords[2][col] == player;
     }
 
-    bool CheckDiagonals(const int row, const int col) const {
+    bool CheckDiagonals() const {
         const bool diagonal1 = coords[0][0] == player && coords[1][1] == player && coords[2][2] == player;
         const bool diagonal2 = coords[0][2] == player && coords[1][1] == player && coords[2][0] == player;
         return diagonal1 || diagonal2;
     }
 
     void Reset() {
-        counter = 0;
         winState = false;
 
        for (int row = 0; row < 3; row++) {
@@ -110,7 +104,6 @@ public:
                coords[row][col] = " ";
            }
        }
-
         Update();
     }
 };
@@ -126,13 +119,13 @@ int main() {
 
         auto [row, col] = Game.Input(Game.userInput, Game.player);
         Game.Update();
-        Game.winState = Game.CheckWin(row, col);
 
-        if (Game.winState) {
+        if (Game.turns < 4; and Game.winState = Game.CheckWin(row, col);) {
             cout << "Player [" + Game.player + "] won this match!" << endl;
         } else if (Game.CheckDraw()) {
             cout << "The game is a draw!" << endl;
         } else {
+            Game.turns++;
             Game.SwitchPlayer();
             return false;
         }
