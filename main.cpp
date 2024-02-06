@@ -6,50 +6,43 @@ using namespace std;
 
 class TicTacToe {
 public:
-    string playerSymbol = "X";
-    string userInput;
+    char playerSymbol = 'X';
+    string userLastInput;
     int turnCounter = 0;
     bool winState = false;
-    string coords[3][3] =  {
-        {" ", " ", " "},
-        {" ", " ", " "},
-        {" ", " ", " "},
-    };
+    map<string, char> coordMap = {
+            {"A1", ' '}, {"A2", ' '}, {"A3", ' '},
+            {"B1", ' '}, {"B2", ' '}, {"B3", ' '},
+            {"C1", ' '}, {"C2", ' '}, {"C3", ' '}
+        };
 
     void Update() const {
         cout << "      _______________" << endl;
         cout << "          1   2   3" << endl;
-        cout << "       A  "+coords[0][0]+" | "+coords[0][1]+" | "+coords[0][2]+" " << endl;
+        cout << "       A  "<<coordMap.at("A1")<<" | "<<coordMap.at("A2")<<" | "<<coordMap.at("A3")<<" " << endl;
         cout << "         -----------" << endl;
-        cout << "       B  "+coords[1][0]+" | "+coords[1][1]+" | "+coords[1][2]+" " << endl;
+        cout << "       B  "<<coordMap.at("B1")<<" | "<<coordMap.at("B2")<<" | "<<coordMap.at("B3")<<" " << endl;
         cout << "         -----------" << endl;
-        cout << "       C  "+coords[2][0]+" | "+coords[2][1]+" | "+coords[2][2]+" " << endl;
+        cout << "       C  "<<coordMap.at("C1")<<" | "<<coordMap.at("C2")<<" | "<<coordMap.at("C3")<<" " << endl;
         cout << "      _______________" << endl;
     }
 
-    void SwitchPlayer() { playerSymbol = playerSymbol == "X" ? "O" : "X"; }
+    void SwitchPlayer() { playerSymbol = playerSymbol == 'X' ? 'O' : 'X'; }
 
-    pair<int, int> Input(const string& userCoords, const string& placeXorO) {
-        pair<int, int> lastMove;
+     void Input(const string& userCoords, const char& placeXO) {
         bool validInput = false;
 
         while (!validInput) {
-            if (map<string, pair<int, int>> coordMap = {
-            {"A1", {0, 0}}, {"A2", {0, 1}}, {"A3", {0, 2}},
-            {"B1", {1, 0}}, {"B2", {1, 1}}, {"B3", {1, 2}},
-            {"C1", {2, 0}}, {"C2", {2, 1}}, {"C3", {2, 2}}
-            }; coordMap.contains(userCoords) && coords[coordMap[userCoords].first][coordMap[userCoords].second] == " ") {
-                coords[coordMap[userCoords].first][coordMap[userCoords].second] = placeXorO;
-                lastMove = coordMap[userCoords];
+            if (coordMap.contains(userCoords) && coordMap[userCoords] == ' ') {
+                coordMap[userCoords] = placeXO;
                 validInput = true;
             } else {
                 cout << "    ___Invalid input___" << endl;
                 cout << "Enter available OR correct coordinates: ";
-                cin >> userInput;
+                cin >> userLastInput;
                 cout << endl;
             }
         }
-        return lastMove;
     }
 
     void nextRound() {
@@ -57,27 +50,40 @@ public:
         SwitchPlayer();
     }
 
-    bool CheckWin(const int row, const int col) const {
-        return CheckRow(row) || CheckColumn(col) || CheckDiagonals();
+    bool CheckWin(const string& lastMove) const {
+        return CheckRow(lastMove[0]) || CheckColumn(lastMove[1]) || CheckDiagonals();
     }
-    bool CheckRow(const int row) const {
-        return coords[row][0] == playerSymbol && coords[row][1] == playerSymbol && coords[row][2] == playerSymbol;
+
+    bool CheckRow(const char rowChar) const {
+        const string row(1,  rowChar);
+        return coordMap.at(row + "1") == playerSymbol &&
+               coordMap.at(row + "2") == playerSymbol &&
+               coordMap.at(row + "3") == playerSymbol;
     }
-    bool CheckColumn(const int col) const {
-        return coords[0][col] == playerSymbol && coords[1][col] == playerSymbol && coords[2][col] == playerSymbol;
+
+    bool CheckColumn(const char colChar) const {
+        const string col(1,  colChar);
+        return coordMap.at("A" + col) == playerSymbol &&
+               coordMap.at("B" + col) == playerSymbol &&
+               coordMap.at("C" + col) == playerSymbol;
     }
+
     bool CheckDiagonals() const {
-        const bool diagonal1 = coords[0][0] == playerSymbol && coords[1][1] == playerSymbol && coords[2][2] == playerSymbol;
-        const bool diagonal2 = coords[0][2] == playerSymbol && coords[1][1] == playerSymbol && coords[2][0] == playerSymbol;
-        return diagonal1 || diagonal2;
+        const bool diagonalHill =  coordMap.at("A1") == playerSymbol &&
+                                   coordMap.at("B2") == playerSymbol &&
+                                   coordMap.at("C3") == playerSymbol;
+        const bool diagonalSlope = coordMap.at("A3") == playerSymbol &&
+                                   coordMap.at("B2") == playerSymbol &&
+                                   coordMap.at("C1") == playerSymbol;
+        return diagonalHill || diagonalSlope;
     }
 
     void Reset() {
         winState = false;
         turnCounter = 0;
 
-        for (auto& row : coords) {
-            ranges::fill(row, " ");
+        for (auto& [coords, input] : coordMap) {
+            input = ' ';
         }
         cout << endl;
         Update();
@@ -90,11 +96,13 @@ int main() {
     Game.Update();
 
     while (!Game.winState) {
-        cout << "["+ Game.playerSymbol +"] turn, Enter coordinates: ";
-        cin >> Game.userInput;
+        cout << "["<<Game.playerSymbol<<"] turn, Enter coordinates: ";
+        cin >> Game.userLastInput;
         cout << endl;
 
-        auto [row, col] = Game.Input(Game.userInput, Game.playerSymbol);
+        Game.Input(Game.userLastInput, Game.playerSymbol);
+
+        system("cls");
         Game.Update();
 
         if (Game.turnCounter < 4) {
@@ -102,9 +110,9 @@ int main() {
             continue;
         }
 
-        Game.winState = Game.CheckWin(row, col);
+        Game.winState = Game.CheckWin(Game.userLastInput);
         if (Game.winState) {
-            cout << "Player [" + Game.playerSymbol + "] won this match!" << endl;
+            cout << "Player ["<<Game.playerSymbol<<"] won this match!" << endl;
         } else if (Game.turnCounter == 8) {
             cout << "The game is a draw!" << endl;
         } else {
@@ -112,8 +120,8 @@ int main() {
             continue;
         }
         cout << "Try again Y/N?: ";
-        cin >> Game.userInput;
-        if (Game.userInput != "Y")
+        cin >> Game.userLastInput;
+        if (Game.userLastInput != "Y")
             continue;
 
         Game.Reset();
