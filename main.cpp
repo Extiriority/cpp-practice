@@ -6,8 +6,8 @@ using namespace std;
 
 class TicTacToe {
 public:
-    char playerSymbol = 'X';
-    string userLastInput;
+    char playerMark = 'X';
+    string userLastMove;
     int turnCounter = 0;
     bool winState = false;
     map<string, char> coordMap = {
@@ -27,22 +27,21 @@ public:
         cout << "      _______________" << endl;
     }
 
-    void SwitchPlayer() { playerSymbol = playerSymbol == 'X' ? 'O' : 'X'; }
+    void SwitchPlayer() { playerMark = playerMark == 'X' ? 'O' : 'X'; }
 
-     void Input(const string& userCoords, const char& placeXO) {
-        bool validInput = false;
+     void Input() {
+        do {
+            cout << "Player ["<<playerMark<<"], enter your move: ";
+            cin >> userLastMove;
+            cout << endl;
 
-        while (!validInput) {
-            if (coordMap.contains(userCoords) && coordMap[userCoords] == ' ') {
-                coordMap[userCoords] = placeXO;
-                validInput = true;
-            } else {
-                cout << "    ___Invalid input___" << endl;
-                cout << "Enter available OR correct coordinates: ";
-                cin >> userLastInput;
-                cout << endl;
+            if (coordMap.contains(userLastMove) && coordMap[userLastMove] == ' ') {
+                coordMap[userLastMove] = playerMark;
+                break;
             }
-        }
+            cout << "    ___Invalid input___" << endl;
+            cout << "available OR correct coords ";
+        } while (true);
     }
 
     void nextRound() {
@@ -50,43 +49,51 @@ public:
         SwitchPlayer();
     }
 
-    bool CheckWin(const string& lastMove) const {
-        return CheckRow(lastMove[0]) || CheckColumn(lastMove[1]) || CheckDiagonals();
+    [[nodiscard]] bool CheckWin() const {
+        return CheckRow(userLastMove[0]) || CheckCol(userLastMove[1]) || CheckDiagonals();
     }
 
-    bool CheckRow(const char rowChar) const {
+    [[nodiscard]] bool CheckRow(const char rowChar) const {
         const string row(1,  rowChar);
-        return coordMap.at(row + "1") == playerSymbol &&
-               coordMap.at(row + "2") == playerSymbol &&
-               coordMap.at(row + "3") == playerSymbol;
+        return coordMap.at(row + "1") == playerMark &&
+               coordMap.at(row + "2") == playerMark &&
+               coordMap.at(row + "3") == playerMark;
     }
 
-    bool CheckColumn(const char colChar) const {
+    [[nodiscard]] bool CheckCol(const char colChar) const {
         const string col(1,  colChar);
-        return coordMap.at("A" + col) == playerSymbol &&
-               coordMap.at("B" + col) == playerSymbol &&
-               coordMap.at("C" + col) == playerSymbol;
+        return coordMap.at("A" + col) == playerMark &&
+               coordMap.at("B" + col) == playerMark &&
+               coordMap.at("C" + col) == playerMark;
     }
 
-    bool CheckDiagonals() const {
-        const bool diagonalHill =  coordMap.at("A1") == playerSymbol &&
-                                   coordMap.at("B2") == playerSymbol &&
-                                   coordMap.at("C3") == playerSymbol;
-        const bool diagonalSlope = coordMap.at("A3") == playerSymbol &&
-                                   coordMap.at("B2") == playerSymbol &&
-                                   coordMap.at("C1") == playerSymbol;
+    [[nodiscard]] bool CheckDiagonals() const {
+        const bool diagonalHill =  coordMap.at("A1") == playerMark &&
+                                   coordMap.at("B2") == playerMark &&
+                                   coordMap.at("C3") == playerMark;
+        const bool diagonalSlope = coordMap.at("A3") == playerMark &&
+                                   coordMap.at("B2") == playerMark &&
+                                   coordMap.at("C1") == playerMark;
         return diagonalHill || diagonalSlope;
     }
 
-    void Reset() {
-        winState = false;
-        turnCounter = 0;
+    void PromptResetOrExit() {
+        cout << "Try again Y/N?: ";
+        cin >> userLastMove;
 
-        for (auto& [coords, input] : coordMap) {
-            input = ' ';
+        if (userLastMove == "Y") {
+            winState = false;
+            turnCounter = 0;
+
+            for (auto& [coords, input] : coordMap) {
+                input = ' ';
+            }
+            cout << endl;
+            Update();
+            SwitchPlayer();
+        } else {
+            cout << "___ Thanks for Playing me! ___" << endl;
         }
-        cout << endl;
-        Update();
     }
 };
 
@@ -96,36 +103,24 @@ int main() {
     Game.Update();
 
     while (!Game.winState) {
-        cout << "["<<Game.playerSymbol<<"] turn, Enter coordinates: ";
-        cin >> Game.userLastInput;
-        cout << endl;
-
-        Game.Input(Game.userLastInput, Game.playerSymbol);
-
-        system("cls");
+        Game.Input();
         Game.Update();
 
-        if (Game.turnCounter < 4) {
+        if (Game.turnCounter > 3) {
             Game.nextRound();
             continue;
         }
 
-        Game.winState = Game.CheckWin(Game.userLastInput);
+        Game.winState = Game.CheckWin();
         if (Game.winState) {
-            cout << "Player ["<<Game.playerSymbol<<"] won this match!" << endl;
+            cout << "Player ["<<Game.playerMark<<"] won this match!" << endl;
         } else if (Game.turnCounter == 8) {
             cout << "The game is a draw!" << endl;
         } else {
             Game.nextRound();
             continue;
         }
-        cout << "Try again Y/N?: ";
-        cin >> Game.userLastInput;
-        if (Game.userLastInput != "Y")
-            continue;
-
-        Game.Reset();
-        Game.SwitchPlayer();
+        Game.PromptResetOrExit();
     }
 
 /*#pragma region [Dynamic memory allocation using raw and unique pointers]
