@@ -157,7 +157,7 @@ int main() {
         //              |   5   | <- 0xFFEEDDC4 (Bottom of the stack (oldest element))
         //              |-------|
 
-    #pragma endregion [Compute if the stack grows up or down]
+    #pragma region [Compute if the stack grows up or down]
         cout << "___Compute if the stack grows up or down___" << endl;
         cout << "The stack grows " << (upOrDown(nullptr) ? "down" : "up") << endl;
     #pragma endregion [Compute if the stack grows up or down]
