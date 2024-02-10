@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <map>
+#include <stack>
 
 using namespace std;
 
@@ -97,16 +98,23 @@ public:
     }
 };
 
+bool upOrDown(const int *other) {
+    int x;
+    if (!other) {
+        return upOrDown(&x);
+    }
+    return &x < other;
+}
+
 int main() {
     TicTacToe Game;
     cout << "Welcome to Noughts and Crosses" << endl;
     Game.Update();
-
     while (!Game.winState) {
         Game.Input();
         Game.Update();
 
-        if (Game.turnCounter > 3) {
+        if (Game.turnCounter < 4) {
             Game.nextRound();
             continue;
         }
@@ -123,7 +131,39 @@ int main() {
         Game.PromptResetOrExit();
     }
 
-/*#pragma region [Dynamic memory allocation using raw and unique pointers]
+    #pragma region [Compute if the stack is empty]
+        cout << "___Compute if the stack is empty___" << endl;
+        stack<int> stack;
+        cout << "Is the stack empty? " << boolalpha << stack.empty() << endl;
+    #pragma endregion [Compute if the stack is empty]
+
+    #pragma region [Push and pop elements from the stack]
+        cout << "___Push and pop elements from the stack___" << endl;
+        stack.push(5);
+        stack.push(7);
+        stack.push(9);
+        cout << "The top element of the stack: " << stack.top() << endl;
+        stack.pop();
+        cout << "The top element of the stack: " << stack.top() << endl;
+    #pragma endregion [Push and pop elements from the stack]
+
+        //Memory Address:  High ------------------> Low (hexadecimal address)
+        //Stack:        | Empty | <- Top
+        //              |-------|
+        //              |   9   | <- 0xFFEEDDCC (pop the top element)
+        //              |-------|
+        //              |   7   | <- 0xFFEEDDC8
+        //              |-------|
+        //              |   5   | <- 0xFFEEDDC4 (Bottom of the stack (oldest element))
+        //              |-------|
+
+    #pragma endregion [Compute if the stack grows up or down]
+        cout << "___Compute if the stack grows up or down___" << endl;
+        cout << "The stack grows " << (upOrDown(nullptr) ? "down" : "up") << endl;
+    #pragma endregion [Compute if the stack grows up or down]
+
+
+    /*#pragma region [Dynamic memory allocation using raw and unique pointers]
     cout << "___Dynamic memory allocation using raw and unique pointers___" << endl;
     // int* dynamicArray = new int[5];
     unique_ptr<int[]> dynamicArray = make_unique<int[]>(5);
