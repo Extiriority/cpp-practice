@@ -104,6 +104,8 @@ bool upOrDown(const int *other) {
         return upOrDown(&x);
     }
     return &x < other;
+    // if the address of x is less than the address of other from the first call, the stack grows down
+    // the recursive call will return the address of x and compare it with the address of other,  this is a good method since the assembly code might be different for different compilers but our compiler is known called clang
 }
 
 int main() {
