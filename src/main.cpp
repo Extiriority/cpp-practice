@@ -21,7 +21,6 @@ int main() {
 
     return 0;
 
-
     TicTacToe Game;
     cout << "Welcome to Noughts and Crosses" << endl;
     Game.Update();

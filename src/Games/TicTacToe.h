@@ -14,10 +14,10 @@ using std::string, std::cout, std::cin, std::map;
 class TicTacToe {
 public:
     char playerMark {'X'};
-    string userLastMove;
+    string userLastMove {};
     int turnCounter {};
     bool winState = false;
-    map<string, char> coordMap = {
+    map<string, char> coordMap  {
         {"A1", ' '}, {"A2", ' '}, {"A3", ' '},
         {"B1", ' '}, {"B2", ' '}, {"B3", ' '},
         {"C1", ' '}, {"C2", ' '}, {"C3", ' '}
