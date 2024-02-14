@@ -13,9 +13,9 @@ using std::string, std::cout, std::cin, std::map;
 
 class TicTacToe {
 public:
-    char playerMark = 'X';
+    char playerMark {'X'};
     string userLastMove;
-    int turnCounter = 0;
+    int turnCounter {};
     bool winState = false;
     map<string, char> coordMap = {
         {"A1", ' '}, {"A2", ' '}, {"A3", ' '},

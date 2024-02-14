@@ -7,9 +7,9 @@
 
 
 int Not_Quite_Lisp::WhichFloor(const std::string& apartment) {
-    int floorPosition = 0;
-    constexpr int groundLevel = 0;
-    constexpr int basementLevel = -1;
+    int floorPosition {};
+    constexpr int groundLevel {};
+    constexpr int basementLevel {-1};
 
     for (int currentFloorLevel = groundLevel; currentFloorLevel < apartment.size(); currentFloorLevel++) {
         floorPosition += apartment[currentFloorLevel] == '(' ? 1 : -1;
