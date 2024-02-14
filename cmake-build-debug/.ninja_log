@@ -1,8 +1,19 @@
 # ninja log v5
+2	237	7296456323609438	build.ninja	7d5a2afc1f38e6f7
 5	1331	7296429455724502	CMakeFiles/untitled.dir/main.cpp.obj	6cfa2889216c12cc
-1	131	7296446879131214	build.ninja	97f2cb05e68d1905
 1331	1432	7296429456699702	untitled.exe	5d08bdd67a1ee7b7
-8	745	7296379239918940	CMakeFiles/untitled.dir/TicTacToe.cpp.obj	5f6aa101445a2de9
-2	237	7296446879131214	build.ninja	7d5a2afc1f38e6f7
 20	305	7296446882642105	CMakeFiles/untitled.dir/src/Advent_of_Code/Not_Quite_Lisp.cpp.obj	84782393afb6081f
+8	745	7296379239918940	CMakeFiles/untitled.dir/TicTacToe.cpp.obj	5f6aa101445a2de9
 18	593	7296446885529132	CMakeFiles/untitled.dir/src/Games/TicTacToe.cpp.obj	3cf64d39c6044e19
+2	229	7296456323609438	build.ninja	7d5a2afc1f38e6f7
+16	291	7296456326898476	CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj	c47fc2063aa353d1
+13	1091	7296456334895865	CMakeFiles/untitled.dir/src/main.cpp.obj	f2400d168aef21f
+9	299	7296457902982733	CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj	c47fc2063aa353d1
+5	1092	7296457910904325	CMakeFiles/untitled.dir/src/main.cpp.obj	f2400d168aef21f
+1092	1192	7296457911879581	untitled.exe	479fe097a8b7159d
+5	276	7296460001359934	CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj	c47fc2063aa353d1
+277	393	7296460002488039	untitled.exe	479fe097a8b7159d
+5	278	7296460185095263	CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj	c47fc2063aa353d1
+279	382	7296460186085592	untitled.exe	479fe097a8b7159d
+5	285	7296462488810541	CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj	c47fc2063aa353d1
+286	396	7296462489865797	untitled.exe	479fe097a8b7159d

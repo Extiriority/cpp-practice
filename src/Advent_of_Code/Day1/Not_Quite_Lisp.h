@@ -4,12 +4,12 @@
 
 #ifndef NOT_QUITE_LISP_H
 #define NOT_QUITE_LISP_H
-
+#include <string>
 
 
 class Not_Quite_Lisp {
 public:
-    int WhichFloor(const std::string& apartment);
+    static int WhichFloor(const std::string& apartment);
 };
 
 

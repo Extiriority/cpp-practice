@@ -2,24 +2,20 @@
 // Created by giang on 14 Feb 2024.
 //
 
+#include "Not_Quite_Lisp.h"
 #include <string>
 
-int WhichFloor(const std::string& apartment) {
+
+int Not_Quite_Lisp::WhichFloor(const std::string& apartment) {
     int floorPosition = 0;
     constexpr int groundLevel = 0;
     constexpr int basementLevel = -1;
 
     for (int currentFloorLevel = groundLevel; currentFloorLevel < apartment.size(); currentFloorLevel++) {
-        if (apartment.at(currentFloorLevel) == '(') {
-            floorPosition++;
-            continue;
-        }
-        floorPosition--;
+        floorPosition += apartment[currentFloorLevel] == '(' ? 1 : -1;
         if (floorPosition == basementLevel) {
             return currentFloorLevel + 1;
         }
     }
     return floorPosition;
 }
-
-#include "Not_Quite_Lisp.h"
