@@ -5,15 +5,16 @@
 #include "Not_Quite_Lisp.h"
 #include <string>
 
+enum Floor { GROUND_LEVEL = 0, BASEMENT_LEVEL = -1 };
 
 int Not_Quite_Lisp::WhichFloor(const std::string& apartment) {
     int floorPosition {};
-    constexpr int groundLevel {};
-    constexpr int basementLevel {-1};
+    constexpr int GROUND_LEVEL {};
+    constexpr int BASEMENT_LEVEL {-1};
 
-    for (int currentFloorLevel = groundLevel; currentFloorLevel < apartment.size(); currentFloorLevel++) {
+    for (int currentFloorLevel = GROUND_LEVEL; currentFloorLevel < apartment.size(); currentFloorLevel++) {
         floorPosition += apartment[currentFloorLevel] == '(' ? 1 : -1;
-        if (floorPosition == basementLevel) {
+        if (floorPosition == BASEMENT_LEVEL) {
             return currentFloorLevel + 1;
         }
     }
