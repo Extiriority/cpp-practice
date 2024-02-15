@@ -12,20 +12,25 @@
 using namespace std;
 
 
-int CalculateTotalWrappingPaper(const string& input) {
+tuple<unsigned, unsigned> CalculateTotalWrappingPaper(const string& input) {
     istringstream ss(input);
     string length, width, height;
-    int totalPaper{};
-
+    unsigned totalPaper{};
+    unsigned totalRibbon{};
     while (getline(ss, length, 'x') && getline(ss, width, 'x') && getline(ss, height, '\n')) {
         int dimension[] {stoi(length), stoi(width), stoi(height)};
 
-        sort(begin(dimension), end(dimension));
-        const int extra = dimension[0] * dimension[1];
+        for (short swapIndex = 0; swapIndex < 3; ++swapIndex) {
+            for (short compareIndex = swapIndex + auto(1); compareIndex < 3; ++compareIndex) {
+                if (dimension[swapIndex] > dimension[compareIndex])
+                    swap(dimension[swapIndex], dimension[compareIndex]);
+            }
+        }
 
-        totalPaper += 2*(dimension[0]*dimension[1] + dimension[1]*dimension[2] + dimension[2]*dimension[0]) + extra;
+        totalPaper += 2*(dimension[0]*dimension[1] + dimension[1]*dimension[2] + dimension[2]*dimension[0]) + dimension[0] * dimension[1];
+        totalRibbon += 2*(dimension[0]+dimension[1]) + dimension[0] * dimension[1] * dimension[2];
     }
-    return totalPaper;
+    return make_tuple(totalPaper, totalRibbon);
 }
 
 int main() {
@@ -1033,7 +1038,8 @@ int main() {
                         "14x3x5\n"
                         "10x9x8\n";
 
-    cout << CalculateTotalWrappingPaper(dimensions) << " = Total Feet wrapping paper" << '\n';
+    auto [paper, ribbon] = CalculateTotalWrappingPaper(dimensions);
+    cout << paper << " = total paper in sq feet and " << ribbon << " = Total Ribbon sq Feet" << '\n';
 
 
     const auto duration_mus = my_watch.elapsed<sw::microseconds>();
