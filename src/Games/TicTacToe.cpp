@@ -57,8 +57,8 @@ bool TicTacToe::CheckCol(const char colChar) const {
 
 bool TicTacToe::CheckDiagonals() const {
     const bool diagonalHill =  coordMap.at("A1") == playerMark &&
-                                   coordMap.at("B2") == playerMark &&
-                                   coordMap.at("C3") == playerMark;
+                               coordMap.at("B2") == playerMark &&
+                               coordMap.at("C3") == playerMark;
     const bool diagonalSlope = coordMap.at("A3") == playerMark &&
                                coordMap.at("B2") == playerMark &&
                                coordMap.at("C1") == playerMark;
