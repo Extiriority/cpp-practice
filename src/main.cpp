@@ -19,7 +19,7 @@ void Display_StopWatch_(const stopwatch::Stopwatch& my_watch) {
 void AoC_Day_1() {
     const Not_Quite_Lisp apartment;
     auto [floorPosition, floorsToBasement] = Not_Quite_Lisp::WhichFloor(apartment.floors);
-    cout << floorPosition << " is where Santa needs to be and" << floorsToBasement << " is the first time to reach basement level [-1]." << '\n';
+    cout << floorPosition << " is where Santa needs to be and " << floorsToBasement << " is the first time to reach basement level [-1]." << '\n';
 }
 void AoC_Day_2() {
     const I_Was_Told_There_Would_Be_No_Math Packages;
@@ -101,6 +101,32 @@ void stackAndHeapExample() {
 
 
 }
+
+#pragma region [Car]
+class Car {
+public:
+    //constructure
+    explicit Car(const string &model) : model(model) {
+        cout << "Car " << model << " is created." << endl;
+    }
+    //Destructure
+    ~Car() {
+        cout << "Car " << model << " is destroyed." << endl;
+    }
+
+    void drive() const {
+        cout << "Driving the car " << model << "." << endl;
+    }
+
+private:
+    string model;
+};
+
+// Function that returns a shared_ptr to a Car
+shared_ptr<Car> createCar(const string &model) {
+    return make_shared<Car>(model);
+}
+#pragma endregion Car
 #pragma endregion [Methods Library]
 
 int main() {
@@ -134,28 +160,3 @@ int main() {
 
 
 
-#pragma region [Car]
-class Car {
-public:
-    //constructure
-    explicit Car(const string &model) : model(model) {
-        cout << "Car " << model << " is created." << endl;
-    }
-    //Destructure
-    ~Car() {
-        cout << "Car " << model << " is destroyed." << endl;
-    }
-
-    void drive() const {
-        cout << "Driving the car " << model << "." << endl;
-    }
-
-private:
-    string model;
-};
-
-// Function that returns a shared_ptr to a Car
-shared_ptr<Car> createCar(const string &model) {
-    return make_shared<Car>(model);
-}
-#pragma endregion Car

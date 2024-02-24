@@ -7,11 +7,11 @@
 void TicTacToe::Update() const {
     cout << "      _______________" << '\n';
     cout << "          1   2   3" << '\n';
-    cout << "       A  "<<coordMap.at("A1")<<" | "<<coordMap.at("A2")<<" | "<<coordMap.at("A3")<<" " << '\n';
+    cout << "       A  "<<coordMap.at("A1")<<" | "<<coordMap.at("A2")<<" | "<<coordMap.at("A3")<<'\n';
     cout << "         -----------" << '\n';
-    cout << "       B  "<<coordMap.at("B1")<<" | "<<coordMap.at("B2")<<" | "<<coordMap.at("B3")<<" " << '\n';
+    cout << "       B  "<<coordMap.at("B1")<<" | "<<coordMap.at("B2")<<" | "<<coordMap.at("B3")<<'\n';
     cout << "         -----------" << '\n';
-    cout << "       C  "<<coordMap.at("C1")<<" | "<<coordMap.at("C2")<<" | "<<coordMap.at("C3")<<" " << '\n';
+    cout << "       C  "<<coordMap.at("C1")<<" | "<<coordMap.at("C2")<<" | "<<coordMap.at("C3")<<'\n';
     cout << "      _______________" << '\n';
 }
 
