@@ -5,6 +5,7 @@
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
 
+#include <cstdint>
 #include <iostream>
 #include <map>
 #include <string>
@@ -17,7 +18,7 @@ public:
     string userLastMove {};
     int turnCounter {};
     bool winState = false;
-    map<string, char> coordMap  {
+    map<string, uint8_t> coordMap  {
         {"A1", ' '}, {"A2", ' '}, {"A3", ' '},
         {"B1", ' '}, {"B2", ' '}, {"B3", ' '},
         {"C1", ' '}, {"C2", ' '}, {"C3", ' '}

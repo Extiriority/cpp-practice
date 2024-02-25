@@ -11,4 +11,6 @@ add_executable(untitled src/main.cpp
         src/Advent_of_Code/Day1/Not_Quite_Lisp.h
         src/Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.cpp
         src/Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.h
+        src/Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.cpp
+        src/Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.h
 )

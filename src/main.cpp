@@ -6,6 +6,7 @@
 
 #include "Advent_of_Code/Day1/Not_Quite_Lisp.h"
 #include "Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.h"
+#include "Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.h"
 #include "Utils/Stopwatch.hpp"
 #include "Games/TicTacToe.h"
 
@@ -25,6 +26,11 @@ void AoC_Day_2() {
     const I_Was_Told_There_Would_Be_No_Math Packages;
     auto [paper, ribbon] = I_Was_Told_There_Would_Be_No_Math::CalculateTotalWrapping(Packages.dimensions);
     cout << paper << " = total paper in sq feet and " << ribbon << " = Total Ribbon sq Feet" << '\n';
+}
+void AoC_Day_3() {
+    const Perfectly_Spherical_Houses_in_a_Vacuum Houses;
+    auto[lastYear, currentYear] = Perfectly_Spherical_Houses_in_a_Vacuum::calculateTotalHousesWithPresent(Houses.compassPoints);
+    cout << lastYear << " Total houses! " << currentYear << " total houses with robo help!" << '\n';
 }
 
 void TicTacToe() {
@@ -129,15 +135,18 @@ shared_ptr<Car> createCar(const string &model) {
 #pragma endregion Car
 #pragma endregion [Methods Library]
 
+
 int main() {
     namespace sw = stopwatch;
     const sw::Stopwatch my_watch;
 
-    AoC_Day_2();
+    AoC_Day_3();
 
     Display_StopWatch_(my_watch);
 
+    return 0;
 
+    AoC_Day_2();
     AoC_Day_1();
 
     TicTacToe();
