@@ -21,32 +21,32 @@ std::tuple<uint32_t, uint32_t> Perfectly_Spherical_Houses_in_a_Vacuum::calculate
     previousYearHousePresents[std::make_pair(previousYearHousePosX, previousYearHousePosY)] = 1;
     currentYearHousePresents[positions[0]] = 2;
 
-    int index = 0;
+    int currentCharacter = 0;
 
     for (const uint8_t towards: directions) {
         switch (towards) {
             case NORTH:
                 previousYearHousePosY++;
-                positions[index].second++;
+                positions[currentCharacter].second++;
                 break;
             case EAST:
                 previousYearHousePosX++;
-                positions[index].first++;
+                positions[currentCharacter].first++;
                 break;
             case SOUTH:
                 previousYearHousePosY--;
-                positions[index].second--;
+                positions[currentCharacter].second--;
                 break;
             case WEST:
                 previousYearHousePosX--;
-                positions[index].first--;
+                positions[currentCharacter].first--;
                 break;
             default:
                 throw std::runtime_error("Unknown enum!");
         }
 
-        currentYearHousePresents[positions[index]]++;
-        index = 1 - index;
+        currentYearHousePresents[positions[currentCharacter]]++;
+        currentCharacter = 1 - currentCharacter;
 
         previousYearHousePresents[std::make_pair(previousYearHousePosX, previousYearHousePosY)]++;
     }
