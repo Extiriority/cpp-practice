@@ -15,13 +15,11 @@ enum location { START = 0 };
 std::tuple<uint32_t, uint32_t> Perfectly_Spherical_Houses_in_a_Vacuum::calculateTotalHousesWithPresent(
     const std::string &directions) {
 
-    int8_t previousYearHousePosX = 0, previousYearHousePosY = 0;
     std::pair<int8_t, int8_t> previousYearHousePos[1] = {{0, 0}};
     std::pair<int8_t, int8_t> currentYearHousePos[2] = {{0, 0}, {0, 0}};
 
     std::map<std::pair<int8_t, int8_t>, uint8_t> previousYearHousePresents, currentYearHousePresents;
 
-    previousYearHousePresents[std::make_pair(previousYearHousePosX, previousYearHousePosY)] = 1;
     currentYearHousePresents[currentYearHousePos[0]] = 2;
 
     int currentCharacter = 0;
