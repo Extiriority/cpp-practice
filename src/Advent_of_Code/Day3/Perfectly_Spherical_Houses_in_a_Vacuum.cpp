@@ -11,46 +11,48 @@
 
 enum compass { NORTH = '^', EAST = '>', SOUTH = 'v', WEST = '<' };
 enum location { START = 0 };
+enum helpers { SANTA = 1, SANTA_AND_ROBO = 2 };
 
 std::tuple<uint32_t, uint32_t> Perfectly_Spherical_Houses_in_a_Vacuum::calculateTotalHousesWithPresent(
     const std::string &directions) {
 
-    std::pair<int8_t, int8_t> previousYearHousePos[1] = {{0, 0}};
-    std::pair<int8_t, int8_t> currentYearHousePos[2] = {{0, 0}, {0, 0}};
+    std::pair<int8_t, int8_t> prevYearHousePos[SANTA]          = {{START, START}};
+    std::pair<int8_t, int8_t> currYearHousePos[SANTA_AND_ROBO] = {{START, START}, {START, START}};
 
-    std::map<std::pair<int8_t, int8_t>, uint8_t> previousYearHousePresents, currentYearHousePresents;
+    std::map<std::pair<int8_t, int8_t>, uint8_t> prevYearHousePresents, currYearHousePresents;
 
-    currentYearHousePresents[currentYearHousePos[0]] = 2;
+    prevYearHousePresents[prevYearHousePos[START]] = 1;
+    currYearHousePresents[currYearHousePos[START]] = 2;
 
     int currentCharacter = 0;
 
     for (const uint8_t towards: directions) {
         switch (towards) {
             case NORTH:
-                previousYearHousePos->second++;
-                currentYearHousePos[currentCharacter].second++;
+                prevYearHousePos->second++;
+                currYearHousePos[currentCharacter].second++;
                 break;
             case EAST:
-                previousYearHousePos->first++;
-                currentYearHousePos[currentCharacter].first++;
+                prevYearHousePos->first++;
+                currYearHousePos[currentCharacter].first++;
                 break;
             case SOUTH:
-                previousYearHousePos->second--;
-                currentYearHousePos[currentCharacter].second--;
+                prevYearHousePos->second--;
+                currYearHousePos[currentCharacter].second--;
                 break;
             case WEST:
-                previousYearHousePos->first--;
-                currentYearHousePos[currentCharacter].first--;
+                prevYearHousePos->first--;
+                currYearHousePos[currentCharacter].first--;
                 break;
             default:
                 throw std::runtime_error("Unknown enum!");
         }
 
-        currentYearHousePresents[currentYearHousePos[currentCharacter]]++;
-        currentCharacter = 1 - currentCharacter;
+        prevYearHousePresents[*prevYearHousePos]++;
 
-        previousYearHousePresents[*previousYearHousePos]++;
+        currYearHousePresents[currYearHousePos[currentCharacter]]++;
+        currentCharacter = 1 - currentCharacter;
     }
 
-    return std::make_tuple(previousYearHousePresents.size(), currentYearHousePresents.size());
+    return std::make_tuple(prevYearHousePresents.size(), currYearHousePresents.size());
 }
