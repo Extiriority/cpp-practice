@@ -1,4 +1,4 @@
 "C:\Users\Amy\AppData\Local\Programs\CLion Nova\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Users/Amy/AppData/Local/Programs/CLion Nova/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\Amy\CLionProjects\cpp-practice -B C:\Users\Amy\CLionProjects\cpp-practice\cmake-build-debug
--- Configuring done (0.2s)
+-- Configuring done (0.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/Amy/CLionProjects/cpp-practice/cmake-build-debug

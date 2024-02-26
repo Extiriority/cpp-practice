@@ -55,11 +55,11 @@ build CMakeFiles/untitled.dir/src/main.cpp.obj: CXX_COMPILER__untitled_unscanned
   OBJECT_DIR = CMakeFiles\untitled.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled.dir\src
 
-build CMakeFiles/untitled.dir/src/Games/TicTacToe.cpp.obj: CXX_COMPILER__untitled_unscanned_Debug C$:/Users/Amy/CLionProjects/cpp-practice/src/Games/TicTacToe.cpp || cmake_object_order_depends_target_untitled
-  DEP_FILE = CMakeFiles\untitled.dir\src\Games\TicTacToe.cpp.obj.d
+build CMakeFiles/untitled.dir/src/Games/TicTacToe/TicTacToe.cpp.obj: CXX_COMPILER__untitled_unscanned_Debug C$:/Users/Amy/CLionProjects/cpp-practice/src/Games/TicTacToe/TicTacToe.cpp || cmake_object_order_depends_target_untitled
+  DEP_FILE = CMakeFiles\untitled.dir\src\Games\TicTacToe\TicTacToe.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\untitled.dir
-  OBJECT_FILE_DIR = CMakeFiles\untitled.dir\src\Games
+  OBJECT_FILE_DIR = CMakeFiles\untitled.dir\src\Games\TicTacToe
 
 build CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj: CXX_COMPILER__untitled_unscanned_Debug C$:/Users/Amy/CLionProjects/cpp-practice/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp || cmake_object_order_depends_target_untitled
   DEP_FILE = CMakeFiles\untitled.dir\src\Advent_of_Code\Day1\Not_Quite_Lisp.cpp.obj.d
@@ -79,6 +79,12 @@ build CMakeFiles/untitled.dir/src/Advent_of_Code/Day3/Perfectly_Spherical_Houses
   OBJECT_DIR = CMakeFiles\untitled.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled.dir\src\Advent_of_Code\Day3
 
+build CMakeFiles/untitled.dir/src/Games/Stratagem.cpp.obj: CXX_COMPILER__untitled_unscanned_Debug C$:/Users/Amy/CLionProjects/cpp-practice/src/Games/Stratagem.cpp || cmake_object_order_depends_target_untitled
+  DEP_FILE = CMakeFiles\untitled.dir\src\Games\Stratagem.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\untitled.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled.dir\src\Games
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target untitled
@@ -87,7 +93,7 @@ build CMakeFiles/untitled.dir/src/Advent_of_Code/Day3/Perfectly_Spherical_Houses
 #############################################
 # Link the executable untitled.exe
 
-build untitled.exe: CXX_EXECUTABLE_LINKER__untitled_Debug CMakeFiles/untitled.dir/src/main.cpp.obj CMakeFiles/untitled.dir/src/Games/TicTacToe.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.cpp.obj
+build untitled.exe: CXX_EXECUTABLE_LINKER__untitled_Debug CMakeFiles/untitled.dir/src/main.cpp.obj CMakeFiles/untitled.dir/src/Games/TicTacToe/TicTacToe.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day1/Not_Quite_Lisp.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.cpp.obj CMakeFiles/untitled.dir/src/Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.cpp.obj CMakeFiles/untitled.dir/src/Games/Stratagem.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\untitled.dir
