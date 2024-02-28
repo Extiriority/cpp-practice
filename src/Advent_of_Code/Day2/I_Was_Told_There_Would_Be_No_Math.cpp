@@ -11,8 +11,7 @@ using namespace std;
 tuple<uint32_t, uint32_t> I_Was_Told_There_Would_Be_No_Math::CalculateTotalWrapping(const string& input) {
     istringstream ss(input);
     string LENGTH, WIDTH, HEIGHT;
-    uint32_t totalPaperInSquareFeet = 0;
-    uint32_t totalLintInSquareFeet = 0;
+    uint32_t totalPaperInSquareFeet = 0, totalLintInSquareFeet = 0;
 
     while (getline(ss, LENGTH, 'x') && getline(ss, WIDTH, 'x') && getline(ss, HEIGHT, '\n')) {
         int dimension[3] {stoi(LENGTH), stoi(WIDTH), stoi(HEIGHT)};

@@ -5,8 +5,14 @@
 #include "Stratagem.h"
 
 #include <ctime>
+#include <map>
+#include <string>
 
-enum Stratagems { Resupply = "vv^>"};
+enum Stratagems { Resupply = 1, Eagle_Airstrike = 2, Autocannon = 3, };
+
+std::map<Stratagems, std::string> stratagemCodes = {
+    {Resupply, "vv^>"}, { Eagle_Airstrike, "^>v>"}, {Autocannon, "v><vv^^>"}
+};
 
 std::string Stratagem::SolveStratagem() {
     srand(time(nullptr));

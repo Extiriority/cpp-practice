@@ -8,7 +8,7 @@
 #include "Advent_of_Code/Day2/I_Was_Told_There_Would_Be_No_Math.h"
 #include "Advent_of_Code/Day3/Perfectly_Spherical_Houses_in_a_Vacuum.h"
 #include "Utils/Stopwatch.hpp"
-#include "Games/TicTacToe.h"
+#include "Games/TicTacToe/TicTacToe.h"
 
 using namespace std;
 void Display_StopWatch_(const stopwatch::Stopwatch& my_watch) {
