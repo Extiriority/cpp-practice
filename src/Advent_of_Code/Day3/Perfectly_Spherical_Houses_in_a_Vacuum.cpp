@@ -18,15 +18,15 @@ enum helpers { SANTA = 1, SANTA_AND_ROBO = 2 };
 struct Coordinate {
     int8_t x, y;
 
-    bool operator==(const Coordinate&axis) const {
-        return x == axis.x && y == axis.y;
+    bool operator==(const Coordinate &at) const {
+        return x == at.x && y == at.y;
     }
 };
 
 struct CoordinateHash {
-    std::size_t operator()(const Coordinate&axis) const {
-        const auto x = std::hash<int8_t>{}(axis.x);
-        const auto y = std::hash<int8_t>{}(axis.y);
+    std::size_t operator()(const Coordinate &at) const {
+        const auto x = std::hash<int8_t>()(at.x);
+        const auto y = std::hash<int8_t>()(at.y);
 
         return x ^ y;
     }
